@@ -23,11 +23,21 @@ module ActiveRecord
           self.uuid_object.uuid
         end
 
-        def assign_uuid
-          return if self.uuid_object.present?
+        def uuid=(value)
+          if self.uuid_object.present?
+            self.uuid_object.update_attributes(:uuid => value)
+          else
+            self.build_uuid_object(:uuid => value)
+          end
+        end
 
-          self.build_uuid_object(:uuid => UUID.create.to_s)
-          self.save unless self.new_record?
+        def assign_uuid
+          if self.uuid_object.present?
+            self.uuid_object.save
+          else
+            self.build_uuid_object(:uuid => UUID.create.to_s)
+            self.save unless self.new_record?
+          end
         end
       end
     end
