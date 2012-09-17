@@ -13,4 +13,6 @@ spec = Gem::Specification.new do |s|
   s.test_files       = Dir.glob "test/**/*_test.rb"
   s.files            = Dir["lib/**/*.rb", "lib/**/*.rake", "*.md", "LICENSE",
     "Rakefile", "rails/init.rb", "generators/**/*.*", "test/**/*.*"]
+
+  s.add_dependency('uuidtools')
 end

@@ -1,6 +1,9 @@
 require File.join(File.dirname(__FILE__), "uuid_it", "uuid.rb")
 require File.join(File.dirname(__FILE__), "ruby-uuid", "uuid.rb")
 
+require 'rubygems'
+require 'uuidtools'
+
 module ActiveRecord
   module Acts
     
@@ -35,7 +38,9 @@ module ActiveRecord
           if self.uuid_object.present?
             self.uuid_object.save
           else
-            self.build_uuid_object(:uuid => UUID.create.to_s)
+            # self.build_uuid_object(:uuid => UUID.create.to_s)
+            # Use external library for building UUIDs
+            self.build_uuid_object(:uuid => ::UUIDTools::UUID.random_create.to_s)
             self.save unless self.new_record?
           end
         end
