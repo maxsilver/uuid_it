@@ -20,7 +20,7 @@ module ActiveRecord
           # has_one :uuid_object, :as => :uuidable, :class_name => "Uuid", :dependent => :destroy
           after_create :assign_uuid
         end
-        self.included(self)
+        # self.included(self)
       end
 
       # def uuid_classes
