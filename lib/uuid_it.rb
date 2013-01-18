@@ -16,6 +16,7 @@ module ActiveRecord
 
       def uuid_it
         class_eval do
+          attr_accessible :uuid
           send :include, InstanceMethods
           # has_one :uuid_object, :as => :uuidable, :class_name => "Uuid", :dependent => :destroy
           after_create :assign_uuid
