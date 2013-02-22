@@ -38,19 +38,14 @@ module ActiveRecord
           self.read_attribute(:uuid)
         end
 
-        # def uuid=(value)
-        #   if self.uuid.present?
-        #     self.uuid_object.update_attributes(:uuid => value)
-        #   else
-        #     self.build_uuid_object(:uuid => value)
-        #   end
-        # end
+        def uuid=(value)
+          self[:uuid] = value
+        end
 
         def assign_uuid
           if self.read_attribute(:uuid).present?
             self.save
           else
-            # self.build_uuid_object(:uuid => UUID.create.to_s)
             # Use external library for building UUIDs
             self.uuid = ::UUIDTools::UUID.random_create.to_s
             self.save unless self.new_record?
